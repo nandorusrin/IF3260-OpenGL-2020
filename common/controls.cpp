@@ -95,8 +95,7 @@ void computeMatricesFromInputs(){
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
 								position,           // Camera is here
-								glm::vec3( 0, 0, 0 ), //To look always to the cube
-								//position+direction, // and looks here : at the same position, plus "direction"
+								position+direction, // and looks here : at the same position, plus "direction"
 								up                  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
 

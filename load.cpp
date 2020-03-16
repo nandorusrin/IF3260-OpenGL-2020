@@ -84,7 +84,7 @@ int loadFileToObject(string path) {
     listId = glGenLists(1);      //generate a uniqe
     glNewList(listId,GL_COMPILE);      //and create it
     for(i = 0; i < faces.size(); ++i) {
-            
+          
         if(faces[i]->isQuad) {
             glBegin(GL_POLYGON);
                 //basically all I do here, is use the facenum (so the number of the face) as an index for the normal, so the 1st normal owe to the first face

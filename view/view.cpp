@@ -65,6 +65,97 @@ int main( void )
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
+	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
+	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
+	static const GLfloat g_vertex_buffer_data[] = { 
+		-1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		 1.0f, 1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		 1.0f,-1.0f,-1.0f,
+		 1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		 1.0f,-1.0f, 1.0f,
+		 1.0f, 1.0f, 1.0f,
+		 1.0f,-1.0f,-1.0f,
+		 1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f,-1.0f,
+		 1.0f, 1.0f, 1.0f,
+		 1.0f,-1.0f, 1.0f,
+		 1.0f, 1.0f, 1.0f,
+		 1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f,
+		 1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		 1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		 1.0f,-1.0f, 1.0f
+	};
+
+	// Two UV coordinatesfor each vertex. They were created with Blender.
+	static const GLfloat g_uv_buffer_data[] = { 
+		0.000059f, 0.000004f, 
+		0.000103f, 0.336048f, 
+		0.335973f, 0.335903f, 
+		1.000023f, 0.000013f, 
+		0.667979f, 0.335851f, 
+		0.999958f, 0.336064f, 
+		0.667979f, 0.335851f, 
+		0.336024f, 0.671877f, 
+		0.667969f, 0.671889f, 
+		1.000023f, 0.000013f, 
+		0.668104f, 0.000013f, 
+		0.667979f, 0.335851f, 
+		0.000059f, 0.000004f, 
+		0.335973f, 0.335903f, 
+		0.336098f, 0.000071f, 
+		0.667979f, 0.335851f, 
+		0.335973f, 0.335903f, 
+		0.336024f, 0.671877f, 
+		1.000004f, 0.671847f, 
+		0.999958f, 0.336064f, 
+		0.667979f, 0.335851f, 
+		0.668104f, 0.000013f, 
+		0.335973f, 0.335903f, 
+		0.667979f, 0.335851f, 
+		0.335973f, 0.335903f, 
+		0.668104f, 0.000013f, 
+		0.336098f, 0.000071f, 
+		0.000103f, 0.336048f, 
+		0.000004f, 0.671870f, 
+		0.336024f, 0.671877f, 
+		0.000103f, 0.336048f, 
+		0.336024f, 0.671877f, 
+		0.335973f, 0.335903f, 
+		0.667969f, 0.671889f, 
+		1.000004f, 0.671847f, 
+		0.667979f, 0.335851f
+	};
+
+	GLuint vertexbuffer;
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+	GLuint uvbuffer;
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     // Hide the mouse and enable unlimited mouvement
